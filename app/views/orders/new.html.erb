@@ -1,0 +1,70 @@
+<p id="notice"><%= notice %></p>
+
+<h1 class="text-center text-2xl">New Burger</h1>
+
+<%= form_with url: orders_url, id: "new-order-form", class: "bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" do |form| %>
+  <div class="tab mb-4" style="display:block">
+    <%= form.label "Select your bread", class: "block text-gray-700 text-sm font-bold mb-2" %>
+    <%= form.select :bread, @breads.map { |bread| [bread.name, bread.id] }, {}, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+  </div>
+
+  <div class="tab mb-4">
+    <%= form.label "Select your patty", class: "block text-gray-700 text-sm font-bold mb-2" %>
+    <%= form.select :patty, @patties.map { |patty| [patty.name, patty.id] }, {}, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+  </div>
+
+  <div class="tab mb-4">
+    <%= form.label "Select your cheese", class: "block text-gray-700 text-sm font-bold mb-2" %>
+    <%= form.select :cheese, @cheeses.map { |cheese| [cheese.name, cheese.id] }, {}, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+  </div>
+
+  <div class="tab mb-4">
+    <%= form.label "Select your toppings", class: "block text-gray-700 text-sm font-bold mb-2" %>
+    <%= form.collection_check_boxes :toppings, @toppings, :id, :name do |b| %>
+      <%= b.label(class: "text-gray-700 text-sm font-bold") { b.check_box(class: "mr-2 leading-tight") + b.text } %>
+    <% end %>
+  </div>
+
+  <div class="tab mb-4">
+    <%= form.label "Select your sauces", class: "block text-gray-700 text-sm font-bold mb-2" %>
+    <%= form.collection_check_boxes :sauces, @sauces, :id, :name do |b| %>
+      <%= b.label(class: "text-gray-700 text-sm font-bold") { b.check_box(class: "mr-2 leading-tight") + b.text } %>
+    <% end %>
+  </div>
+
+  <div class="tab mb-4">
+    <%= form.label "Name your burger", class: "block text-gray-700 text-sm font-bold mb-2" %>
+    <%= form.text_field :name, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+  </div>
+
+  <div style="overflow:auto;">
+    <div style="float:right;">
+      <button
+        type="button"
+        id="prevBtn"
+        class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
+        onclick="nextPrev(-1)"
+      >
+        Previous
+      </button>
+
+      <button
+        type="button"
+        id="nextBtn"
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        onclick="nextPrev(1)"
+      >
+        Next
+      </button>
+    </div>
+  </div>
+
+  <div style="text-align:center;margin-top:40px;">
+    <span class="step"></span>
+    <span class="step"></span>
+    <span class="step"></span>
+    <span class="step"></span>
+    <span class="step"></span>
+    <span class="step"></span>
+  </div>
+<% end %>

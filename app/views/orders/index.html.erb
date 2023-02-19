@@ -1,0 +1,23 @@
+<p id="notice"><%= notice %></p>
+
+<%= link_to "Add Burger", new_order_path, class: "text-blue-500" %>
+
+<table class="min-w-full">
+  <thead class="border-b">
+    <tr>
+      <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Name</th>
+      <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Total</th>
+      <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Purchased At</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @orders.each do |order| %>
+      <tr class="border-b">
+        <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"><%= link_to order.name, order_path(order), class: "text-blue-500" %></td>
+        <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"><%= humanized_money_with_symbol order.total %></td>
+        <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"><%= order.created_at.strftime("%m/%d/%Y %I:%M%p") %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,23 @@
+<p id="notice"><%= notice %></p>
+
+<h1 class="text-center text-2xl"><%= @order.name %></h1>
+
+<table class="min-w-full">
+  <thead class="border-b">
+    <tr>
+      <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Item</th>
+      <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Type</th>
+      <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Price</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @burger_components.each do |burger_component| %>
+      <tr class="border-b">
+        <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"><%= burger_component.name %></td>
+        <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"><%= burger_component.component_type.titleize %></td>
+        <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"><%= humanized_money_with_symbol burger_component.price %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
