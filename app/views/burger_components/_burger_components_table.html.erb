@@ -1,0 +1,26 @@
+<table class="min-w-full mb-10">
+  <thead class="border-b">
+    <tr>
+      <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Name</th>
+      <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Price</th>
+      <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% burger_components.each do |burger_component| %>
+      <tr class="border-b">
+        <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"><%= link_to burger_component.name, edit_burger_component_path(burger_component), class: "text-blue-500" %></td>
+        <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"><%= humanized_money_with_symbol burger_component.price %></td>
+        <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+          <div class="text-blue-400">
+            <%= link_to "Edit", edit_burger_component_path(burger_component) %>
+          </div>
+          <div class="text-red-400">
+            <%= button_to "Delete", burger_component, method: :delete %>
+          </div>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

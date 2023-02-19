@@ -1,0 +1,22 @@
+<p id="notice"><%= notice %></p>
+<h1 class="text-center text-3xl">Ingredients</h1>
+
+<h1 class="text-2xl">Breads</h1>
+<%= link_to "Add Bread", new_burger_component_path(component_type: :bread), class: "text-blue-500" %>
+<%= render "burger_components_table", burger_components: @breads %>
+
+<h1 class="text-2xl">Patties</h1>
+<%= link_to "Add Patty", new_burger_component_path(component_type: :patty), class: "text-blue-500" %>
+<%= render "burger_components_table", burger_components: @patties %>
+
+<h1 class="text-2xl">Cheeses</h1>
+<%= link_to "Add Cheese", new_burger_component_path(component_type: :cheese), class: "text-blue-500" %>
+<%= render "burger_components_table", burger_components: @cheeses %>
+
+<h1 class="text-2xl">Toppings</h1>
+<%= link_to "Add Topping", new_burger_component_path(component_type: :topping), class: "text-blue-500" %>
+<%= render "burger_components_table", burger_components: @toppings %>
+
+<h1 class="text-2xl">Sauces</h1>
+<%= link_to "Add Sauce", new_burger_component_path(component_type: :sauce), class: "text-blue-500" %>
+<%= render "burger_components_table", burger_components: @sauces %>
