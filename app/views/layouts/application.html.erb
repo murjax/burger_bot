@@ -12,7 +12,21 @@
   </head>
 
   <body>
-    <main class="container mx-auto mt-28 px-5">
+    <header>
+      <section>
+        <nav>
+          <div class="p-2 flex justify-between bg-black">
+            <h3 class="text-2xl text-white">
+              <%= link_to "BurgerBot", orders_path, class: "px-1 text-white" %>
+            </h3>
+            <div>
+              <%= link_to "Orders", orders_path, class: "px-1 text-white hover:text-blue-400" %>
+            </div>
+          </div>
+        </nav>
+      </section>
+    </header>
+    <main class="container mx-auto mt-10 px-5">
       <%= yield %>
     </main>
   </body>
