@@ -19,15 +19,22 @@
             <h3 class="text-2xl text-white">
               <%= link_to "BurgerBot", orders_path, class: "px-1 text-white" %>
             </h3>
-            <div>
-              <%= link_to "Orders", orders_path, class: "px-1 text-white hover:text-blue-400" %>
-              <%= link_to "Ingredients", ingredients_path, class: "px-1 text-white hover:text-blue-400" %>
+            <div class="flex">
+              <% if user_signed_in? %>
+                <%= link_to "Orders", orders_path, class: "px-1 text-white hover:text-blue-400" %>
+                <%= link_to "Ingredients", ingredients_path, class: "px-1 text-white hover:text-blue-400" %>
+                <%= button_to "Sign Out", destroy_user_session_path, method: :delete, class: "px-1 text-white hover:text-blue-400" %>
+              <% else %>
+                <%= link_to "Sign In", new_user_session_path, class: "px-1 text-white hover:text-blue-400" %>
+                <%= link_to "Sign Up", new_user_registration_path, class: "px-1 text-white hover:text-blue-400" %>
+              <% end %>
             </div>
           </div>
         </nav>
       </section>
     </header>
     <main class="container mx-auto mt-10 px-5">
+      <p id="notice"><%= notice %></p>
       <%= yield %>
     </main>
   </body>
