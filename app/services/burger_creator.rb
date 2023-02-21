@@ -71,14 +71,10 @@ class BurgerCreator
   end
 
   def total_cents
-<<<<<<< HEAD
     if ENV['PRICE_SHEETS_ENABLED']
       price_sheet_ingredients.sum(:price_cents)
     else
       ingredients.sum(:price_cents)
     end
-=======
-    price_sheet_ingredients.sum(:price_cents)
->>>>>>> b8b7382 (Add price sheets)
   end
 end
