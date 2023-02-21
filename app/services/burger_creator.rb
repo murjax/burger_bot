@@ -28,15 +28,11 @@ class BurgerCreator
 
   def add_ingredients
     ingredients.each do |ingredient|
-      price_cents = ENV['PRICE_SHEETS_ENABLED'] ? ingredient.price_sheet_ingredient.price_cents : ingredient.price_cents
+      price_cents = Flipper.enabled(:price_sheets, user) ? ingredient.price_sheet_ingredient.price_cents : ingredient.price_cents
       order_ingredient = OrderIngredient.create(
         order: order,
         ingredient: ingredient,
-<<<<<<< HEAD
         price_cents: price_cents
-=======
-        price_cents: ingredient.price_sheet_ingredient.price_cents
->>>>>>> 2920365 (Add price sheets)
       )
       errors.push(order_ingredient.errors.full_messages)
     end
@@ -71,7 +67,7 @@ class BurgerCreator
   end
 
   def total_cents
-    if ENV['PRICE_SHEETS_ENABLED']
+    if Flipper.enabled?(:price_sheets, user)
       price_sheet_ingredients.sum(:price_cents)
     else
       ingredients.sum(:price_cents)

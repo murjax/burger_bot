@@ -39,11 +39,7 @@ class PriceSheetIngredientsController < ApplicationController
   end
 
   def set_ingredients
-<<<<<<< HEAD
     @ingredients = Ingredient.where(user: current_user)
-=======
-    @ingredients = Ingredient.all
->>>>>>> b8b7382 (Add price sheets)
   end
 
   def permitted_params
