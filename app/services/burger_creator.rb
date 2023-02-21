@@ -27,7 +27,11 @@ class BurgerCreator
 
   def add_components
     burger_components.each do |burger_component|
-      order_burger_component = OrderBurgerComponent.create(order: order, burger_component: burger_component)
+      order_burger_component = OrderBurgerComponent.create(
+        order: order,
+        burger_component: burger_component,
+        price_cents: burger_component.price_cents
+      )
       errors.push(order_burger_component.errors.full_messages)
     end
   end

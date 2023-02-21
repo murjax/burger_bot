@@ -6,8 +6,6 @@ class OrdersController < ApplicationController
   end
 
   def show
-    burger_component_ids = @order.order_burger_components.pluck(:burger_component_id)
-    @burger_components = BurgerComponent.where(id: burger_component_ids)
   end
 
   def new
