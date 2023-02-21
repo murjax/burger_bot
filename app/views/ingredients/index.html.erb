@@ -1,0 +1,22 @@
+<p id="notice"><%= notice %></p>
+<h1 class="text-center text-3xl">Ingredients</h1>
+
+<h1 class="text-2xl">Breads</h1>
+<%= link_to "Add Bread", new_ingredient_path(ingredient_type: :bread), class: "text-blue-500" %>
+<%= render "ingredients_table", ingredients: @breads %>
+
+<h1 class="text-2xl">Patties</h1>
+<%= link_to "Add Patty", new_ingredient_path(ingredient_type: :patty), class: "text-blue-500" %>
+<%= render "ingredients_table", ingredients: @patties %>
+
+<h1 class="text-2xl">Cheeses</h1>
+<%= link_to "Add Cheese", new_ingredient_path(ingredient_type: :cheese), class: "text-blue-500" %>
+<%= render "ingredients_table", ingredients: @cheeses %>
+
+<h1 class="text-2xl">Toppings</h1>
+<%= link_to "Add Topping", new_ingredient_path(ingredient_type: :topping), class: "text-blue-500" %>
+<%= render "ingredients_table", ingredients: @toppings %>
+
+<h1 class="text-2xl">Sauces</h1>
+<%= link_to "Add Sauce", new_ingredient_path(ingredient_type: :sauce), class: "text-blue-500" %>
+<%= render "ingredients_table", ingredients: @sauces %>

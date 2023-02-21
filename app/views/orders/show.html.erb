@@ -12,16 +12,16 @@
   </thead>
 
   <tbody>
-    <% @order.order_burger_components.each do |order_burger_component| %>
+    <% @order.order_ingredients.each do |order_ingredient| %>
       <tr class="border-b">
         <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-          <%= order_burger_component.burger_component.name %>
+          <%= order_ingredient.ingredient.name %>
         </td>
         <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-          <%= order_burger_component.burger_component.component_type.titleize %>
+          <%= order_ingredient.ingredient.ingredient_type.titleize %>
         </td>
         <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-          <%= humanized_money_with_symbol order_burger_component.price %>
+          <%= humanized_money_with_symbol order_ingredient.price %>
         </td>
       </tr>
     <% end %>

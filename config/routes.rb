@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
   resources :orders
-  resources :burger_components
+  resources :ingredients
   root 'orders#index'
 end

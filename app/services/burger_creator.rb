@@ -10,7 +10,7 @@ class BurgerCreator
     create_order
     return false if has_errors?
 
-    add_components
+    add_ingredients
     !has_errors?
   end
 
@@ -25,14 +25,14 @@ class BurgerCreator
     self.errors = order.errors.full_messages
   end
 
-  def add_components
-    burger_components.each do |burger_component|
-      order_burger_component = OrderBurgerComponent.create(
+  def add_ingredients
+    ingredients.each do |ingredient|
+      order_ingredient = OrderIngredient.create(
         order: order,
-        burger_component: burger_component,
-        price_cents: burger_component.price_cents
+        ingredient: ingredient,
+        price_cents: ingredient.price_cents
       )
-      errors.push(order_burger_component.errors.full_messages)
+      errors.push(order_ingredient.errors.full_messages)
     end
   end
 
@@ -47,15 +47,15 @@ class BurgerCreator
     }
   end
 
-  def burger_component_ids
+  def ingredient_ids
     [*params[:bread], *params[:patty], *params[:cheese], *params[:toppings], *params[:sauces]].flatten
   end
 
-  def burger_components
-    @burger_components ||= BurgerComponent.where(id: burger_component_ids)
+  def ingredients
+    @ingredients ||= Ingredient.where(id: ingredient_ids)
   end
 
   def total_cents
-    burger_components.sum(:price_cents)
+    ingredients.sum(:price_cents)
   end
 end

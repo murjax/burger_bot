@@ -10,26 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_21_015926) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_21_020936) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "burger_components", force: :cascade do |t|
-    t.integer "component_type"
+  create_table "ingredients", force: :cascade do |t|
+    t.integer "ingredient_type"
     t.integer "price_cents"
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "order_burger_components", force: :cascade do |t|
+  create_table "order_ingredients", force: :cascade do |t|
     t.bigint "order_id"
-    t.bigint "burger_component_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "price_cents"
-    t.index ["burger_component_id"], name: "index_order_burger_components_on_burger_component_id"
-    t.index ["order_id"], name: "index_order_burger_components_on_order_id"
+    t.bigint "ingredient_id"
+    t.index ["ingredient_id"], name: "index_order_ingredients_on_ingredient_id"
+    t.index ["order_id"], name: "index_order_ingredients_on_order_id"
   end
 
   create_table "orders", force: :cascade do |t|

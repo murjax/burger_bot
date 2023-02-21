@@ -8,16 +8,16 @@
   </thead>
 
   <tbody>
-    <% burger_components.each do |burger_component| %>
+    <% ingredients.each do |ingredient| %>
       <tr class="border-b">
-        <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"><%= link_to burger_component.name, edit_burger_component_path(burger_component), class: "text-blue-500" %></td>
-        <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"><%= humanized_money_with_symbol burger_component.price %></td>
+        <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"><%= link_to ingredient.name, edit_ingredient_path(ingredient), class: "text-blue-500" %></td>
+        <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"><%= humanized_money_with_symbol ingredient.price %></td>
         <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
           <div class="text-blue-400">
-            <%= link_to "Edit", edit_burger_component_path(burger_component) %>
+            <%= link_to "Edit", edit_ingredient_path(ingredient) %>
           </div>
           <div class="text-red-400">
-            <%= button_to "Delete", burger_component, method: :delete %>
+            <%= button_to "Delete", ingredient, method: :delete %>
           </div>
         </td>
       </tr>

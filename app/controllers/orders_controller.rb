@@ -10,14 +10,14 @@ class OrdersController < ApplicationController
 
   def new
     @order = Order.new
-    set_components
+    set_ingredients
   end
 
   def create
     if burger_creator.save
       redirect_to orders_url, notice: 'Burger saved successfully!'
     else
-      set_components
+      set_ingredients
       render :new, status: :unprocessable_entity, notice: 'Problem saving burger. Please try again.'
     end
   end
@@ -28,12 +28,12 @@ class OrdersController < ApplicationController
     @order = Order.find(params[:id])
   end
 
-  def set_components
-    @breads = BurgerComponent.where(component_type: :bread)
-    @patties = BurgerComponent.where(component_type: :patty)
-    @cheeses = BurgerComponent.where(component_type: :cheese)
-    @toppings = BurgerComponent.where(component_type: :topping)
-    @sauces = BurgerComponent.where(component_type: :sauce)
+  def set_ingredients
+    @breads = Ingredient.where(ingredient_type: :bread)
+    @patties = Ingredient.where(ingredient_type: :patty)
+    @cheeses = Ingredient.where(ingredient_type: :cheese)
+    @toppings = Ingredient.where(ingredient_type: :topping)
+    @sauces = Ingredient.where(ingredient_type: :sauce)
   end
 
   def permitted_params
