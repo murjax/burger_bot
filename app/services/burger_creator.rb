@@ -32,7 +32,11 @@ class BurgerCreator
       order_ingredient = OrderIngredient.create(
         order: order,
         ingredient: ingredient,
+<<<<<<< HEAD
         price_cents: price_cents
+=======
+        price_cents: ingredient.price_sheet_ingredient.price_cents
+>>>>>>> 2920365 (Add price sheets)
       )
       errors.push(order_ingredient.errors.full_messages)
     end
