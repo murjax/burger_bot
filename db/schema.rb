@@ -74,21 +74,4 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_26_015814) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  create_table "price_sheet_ingredients", force: :cascade do |t|
-    t.bigint "price_sheet_id"
-    t.bigint "ingredient_id"
-    t.integer "price_cents"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["ingredient_id"], name: "index_price_sheet_ingredients_on_ingredient_id"
-    t.index ["price_sheet_id"], name: "index_price_sheet_ingredients_on_price_sheet_id"
-  end
-
-  create_table "price_sheets", force: :cascade do |t|
-    t.string "name"
-    t.boolean "active", default: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
 end

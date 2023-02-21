@@ -28,10 +28,11 @@ class BurgerCreator
 
   def add_ingredients
     ingredients.each do |ingredient|
+      price_cents = ENV['PRICE_SHEETS_ENABLED'] ? ingredient.price_sheet_ingredient.price_cents : ingredient.price_cents
       order_ingredient = OrderIngredient.create(
         order: order,
         ingredient: ingredient,
-        price_cents: ingredient.price_sheet_ingredient.price_cents
+        price_cents: price_cents
       )
       errors.push(order_ingredient.errors.full_messages)
     end
@@ -66,6 +67,10 @@ class BurgerCreator
   end
 
   def total_cents
-    price_sheet_ingredients.sum(:price_cents)
+    if ENV['PRICE_SHEETS_ENABLED']
+      price_sheet_ingredients.sum(:price_cents)
+    else
+      ingredients.sum(:price_cents)
+    end
   end
 end
