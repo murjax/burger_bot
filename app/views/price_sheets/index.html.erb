@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+<h1 class="text-center text-3xl">Price Sheets</h1>
+
+<%= link_to "Add Price Sheet", new_price_sheet_path, class: "text-blue-500" %>
+<table class="min-w-full mb-10">
+  <thead class="border-b">
+    <tr>
+      <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Name</th>
+      <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Active</th>
+      <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @price_sheets.each do |price_sheet| %>
+      <tr class="border-b">
+        <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"><%= link_to price_sheet.name, edit_price_sheet_path(price_sheet), class: "text-blue-500" %></td>
+        <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"><%= price_sheet.active? %></td>
+        <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+          <div class="text-blue-400">
+            <%= link_to "Edit", edit_price_sheet_path(price_sheet) %>
+          </div>
+          <div class="text-red-400">
+            <%= button_to "Delete", price_sheet, method: :delete %>
+          </div>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

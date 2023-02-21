@@ -1,0 +1,37 @@
+<p id="notice"><%= notice %></p>
+
+<h1 class="text-center text-2xl">Edit Price Sheet</h1>
+
+<%= render "form", price_sheet: @price_sheet %>
+
+<%= link_to "Add Ingredient", new_price_sheet_ingredient_path(price_sheet_id: @price_sheet.id), class: "text-blue-500" %>
+<table class="min-w-full mb-10">
+  <thead class="border-b">
+    <tr>
+      <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Name</th>
+      <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Price</th>
+      <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @price_sheet.price_sheet_ingredients.each do |price_sheet_ingredient| %>
+      <tr class="border-b">
+        <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+          <%= link_to price_sheet_ingredient.ingredient.name, edit_price_sheet_ingredient_path(price_sheet_ingredient), class: "text-blue-500" %>
+        </td>
+        <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+          <%= humanized_money_with_symbol price_sheet_ingredient.price %>
+        </td>
+        <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+          <div class="text-blue-400">
+            <%= link_to "Edit", edit_price_sheet_ingredient_path(price_sheet_ingredient) %>
+          </div>
+          <div class="text-red-400">
+            <%= button_to "Delete", price_sheet_ingredient, method: :delete %>
+          </div>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

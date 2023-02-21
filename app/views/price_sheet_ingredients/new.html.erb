@@ -1,0 +1,5 @@
+<p id="notice"><%= notice %></p>
+
+<h1 class="text-center text-2xl">New Ingredient for Price Sheet <%= @price_sheet_ingredient.price_sheet.name %></h1>
+
+<%= render "form", price_sheet_ingredient: @price_sheet_ingredient, ingredients: @ingredients %>

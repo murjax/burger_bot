@@ -31,7 +31,7 @@ class BurgerCreator
       order_ingredient = OrderIngredient.create(
         order: order,
         ingredient: ingredient,
-        price_cents: ingredient.price_cents
+        price_cents: ingredient.price_sheet_ingredient.price_cents
       )
       errors.push(order_ingredient.errors.full_messages)
     end
@@ -57,7 +57,15 @@ class BurgerCreator
     @ingredients ||= Ingredient.where(id: ingredient_ids)
   end
 
+  def price_sheet
+    @price_sheet ||= PriceSheet.find_by(active: true)
+  end
+
+  def price_sheet_ingredients
+    @price_sheet_ingredients ||= price_sheet.price_sheet_ingredients.where(ingredient_id: ingredient_ids)
+  end
+
   def total_cents
-    ingredients.sum(:price_cents)
+    price_sheet_ingredients.sum(:price_cents)
   end
 end
