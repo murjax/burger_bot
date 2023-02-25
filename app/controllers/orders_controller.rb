@@ -2,7 +2,7 @@ class OrdersController < ApplicationController
   before_action :set_order, only: %i[show]
 
   def index
-    @orders = Order.all
+    @orders = Order.where(user: current_user)
   end
 
   def show
@@ -41,6 +41,6 @@ class OrdersController < ApplicationController
   end
 
   def burger_creator
-    @burger_creator ||= BurgerCreator.new(permitted_params)
+    @burger_creator ||= BurgerCreator.new(permitted_params, current_user)
   end
 end

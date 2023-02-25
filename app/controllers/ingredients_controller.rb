@@ -2,11 +2,11 @@ class IngredientsController < ApplicationController
   before_action :set_ingredient, only: %i[edit update destroy]
 
   def index
-    @breads = Ingredient.where(ingredient_type: :bread)
-    @patties = Ingredient.where(ingredient_type: :patty)
-    @cheeses = Ingredient.where(ingredient_type: :cheese)
-    @toppings = Ingredient.where(ingredient_type: :topping)
-    @sauces = Ingredient.where(ingredient_type: :sauce)
+    @breads = Ingredient.where(user: current_user, ingredient_type: :bread)
+    @patties = Ingredient.where(user: current_user, ingredient_type: :patty)
+    @cheeses = Ingredient.where(user: current_user, ingredient_type: :cheese)
+    @toppings = Ingredient.where(user: current_user, ingredient_type: :topping)
+    @sauces = Ingredient.where(user: current_user, ingredient_type: :sauce)
   end
 
   def new
@@ -14,7 +14,7 @@ class IngredientsController < ApplicationController
   end
 
   def create
-    @ingredient = Ingredient.new(permitted_params)
+    @ingredient = Ingredient.new(permitted_params.merge(user: current_user))
 
     if @ingredient.save
       redirect_to ingredients_url, notice: 'Ingredient was successfully created.'

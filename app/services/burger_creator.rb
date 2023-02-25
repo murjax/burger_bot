@@ -1,8 +1,9 @@
 class BurgerCreator
   attr_reader :errors
 
-  def initialize(params)
+  def initialize(params, user)
     @params = params
+    @user = user
     @errors = []
   end
 
@@ -16,7 +17,7 @@ class BurgerCreator
 
   private
 
-  attr_reader :params
+  attr_reader :params, :user
   attr_writer :errors
   attr_accessor :order
 
@@ -43,7 +44,8 @@ class BurgerCreator
   def order_params
     {
       name: params[:name],
-      total_cents: total_cents
+      total_cents: total_cents,
+      user: user
     }
   end
 
