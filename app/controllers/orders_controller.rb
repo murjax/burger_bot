@@ -29,11 +29,11 @@ class OrdersController < ApplicationController
   end
 
   def set_ingredients
-    @breads = Ingredient.where(ingredient_type: :bread)
-    @patties = Ingredient.where(ingredient_type: :patty)
-    @cheeses = Ingredient.where(ingredient_type: :cheese)
-    @toppings = Ingredient.where(ingredient_type: :topping)
-    @sauces = Ingredient.where(ingredient_type: :sauce)
+    @breads = Ingredient.where(user: current_user, ingredient_type: :bread)
+    @patties = Ingredient.where(user: current_user, ingredient_type: :patty)
+    @cheeses = Ingredient.where(user: current_user, ingredient_type: :cheese)
+    @toppings = Ingredient.where(user: current_user, ingredient_type: :topping)
+    @sauces = Ingredient.where(user: current_user, ingredient_type: :sauce)
   end
 
   def permitted_params
