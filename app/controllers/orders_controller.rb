@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :set_order, only: %i[show]
+  before_action :set_order, only: %i[show destroy]
 
   def index
     @orders = Order.where(user: current_user)
@@ -20,6 +20,11 @@ class OrdersController < ApplicationController
       set_ingredients
       render :new, status: :unprocessable_entity, notice: 'Problem saving burger. Please try again.'
     end
+  end
+
+  def destroy
+    @order.destroy
+    redirect_to orders_url, notice: 'Order was successfully deleted.'
   end
 
   private
