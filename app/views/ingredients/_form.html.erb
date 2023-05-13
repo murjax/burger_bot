@@ -18,7 +18,7 @@
     <%= form.label "Photo", class: "block text-gray-700 text-sm font-bold mb-2" %>
     <% if ingredient.photo.attached? %>
       <div class="current-photo relative inline-block">
-        <%= image_tag ingredient.photo.variant(resize_to_limit: [100, 100]) %>
+        <%= image_tag ingredient.photo.variant(:thumb_large) %>
         <button
           type="button"
           class="text-red-400 cursor-pointer absolute top-0 right-0"
