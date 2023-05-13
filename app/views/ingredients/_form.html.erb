@@ -17,14 +17,14 @@
   <div class="tab mb-4">
     <%= form.label "Photo", class: "block text-gray-700 text-sm font-bold mb-2" %>
     <% if ingredient.photo.attached? %>
-      <div class="current-photo">
+      <div class="current-photo relative inline-block">
         <%= image_tag ingredient.photo.variant(resize_to_limit: [100, 100]) %>
         <button
           type="button"
-          class="text-red-400 cursor-pointer"
+          class="text-red-400 cursor-pointer absolute top-0 right-0"
           onclick="stageFileDelete(this, <%= ingredient.photo.id %>)"
         >
-          Delete
+          <i class="fa-regular fa-circle-xmark"></i>
         </button>
       </div>
       <div class="new-photo-field hidden">

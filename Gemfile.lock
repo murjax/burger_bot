@@ -97,6 +97,8 @@ GEM
       railties (>= 3.2)
     erubi (1.12.0)
     ffi (1.15.5)
+    font-awesome-sass (6.4.0)
+      sassc (~> 2.0)
     globalid (1.1.0)
       activesupport (>= 5.0)
     i18n (1.12.0)
@@ -192,6 +194,8 @@ GEM
     ruby-vips (2.1.4)
       ffi (~> 1.12)
     rubyzip (2.3.2)
+    sassc (2.4.0)
+      ffi (~> 1.9)
     selenium-webdriver (4.8.1)
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
@@ -237,6 +241,7 @@ DEPENDENCIES
   capybara
   devise
   dotenv-rails
+  font-awesome-sass (~> 6.4.0)
   image_processing (~> 1.2)
   importmap-rails
   money-rails
