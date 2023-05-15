@@ -14,7 +14,7 @@ class IngredientsController < ApplicationController
   end
 
   def create
-    @ingredient = Ingredient.new(permitted_params.merge(user: current_user))
+    @ingredient = Ingredient.new(ingredient_params.merge(user: current_user))
 
     if @ingredient.save
       redirect_to ingredients_url, notice: 'Ingredient was successfully created.'
@@ -27,7 +27,9 @@ class IngredientsController < ApplicationController
   end
 
   def update
-    if @ingredient.update(permitted_params)
+    purge_delete_marked_photo
+
+    if @ingredient.update(ingredient_params)
       redirect_to ingredients_url, notice: 'Ingredient was successfully updated.'
     else
       render :edit, status: :unprocessable_entity
@@ -45,11 +47,21 @@ class IngredientsController < ApplicationController
     @ingredient = Ingredient.find(params[:id])
   end
 
-  def permitted_params
-    params.require(:ingredient).permit(:name, :ingredient_type, :price)
+  def file_params
+    params.require(:ingredient).permit(:purge_photos)
+  end
+
+  def ingredient_params
+    params.require(:ingredient).permit(:name, :ingredient_type, :price, :photo)
   end
 
   def new_params
     params.permit(:ingredient_type)
+  end
+
+  def purge_delete_marked_photo
+    return unless file_params[:purge_photos].present? && @ingredient.photo.blob_id == file_params[:purge_photos].to_i
+
+    @ingredient.photo.purge
   end
 end

@@ -14,5 +14,28 @@
     <%= form.number_field :price, step: 0.01, value: ingredient.price.to_s, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
   </div>
 
+  <div class="tab mb-4">
+    <%= form.label "Photo", class: "block text-gray-700 text-sm font-bold mb-2" %>
+    <% if ingredient.photo.attached? %>
+      <div class="current-photo relative inline-block">
+        <%= image_tag ingredient.photo.variant(:thumb_large) %>
+        <button
+          type="button"
+          class="text-red-400 cursor-pointer absolute top-0 right-0"
+          onclick="stageFileDelete(this, <%= ingredient.photo.id %>)"
+        >
+          <i class="fa-regular fa-circle-xmark"></i>
+        </button>
+      </div>
+      <div class="new-photo-field hidden">
+        <%= form.file_field :photo %>
+      </div>
+    <% else %>
+      <%= form.file_field :photo %>
+    <% end %>
+  </div>
+
+  <%= form.hidden_field(:purge_photos) %>
+
   <%= form.submit "Save", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded cursor-pointer" %>
 <% end %>

@@ -50,3 +50,17 @@ function fixStepIndicator(n) {
   //... and adds the "active" class to the current step:
   x[n].className += " active";
 }
+
+window.stageFileDelete = function stageFileDelete(target, blobId) {
+  // Set hidden purge photos field
+  document.getElementById("ingredient_purge_photos").setAttribute("value", blobId);
+
+  var existingPhotoContainer = target.parentElement;
+  var newPhotoContainer = existingPhotoContainer.parentElement.querySelector(".new-photo-field");
+
+  // Remove image from the dom to indicate it will remove on save.
+  existingPhotoContainer.remove();
+
+  // Unhide form field.
+  newPhotoContainer.classList.remove("hidden");
+}
