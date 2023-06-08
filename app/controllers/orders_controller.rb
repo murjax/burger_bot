@@ -3,6 +3,17 @@ class OrdersController < ApplicationController
 
   def index
     @orders = Order.where(user: current_user)
+
+    if index_params[:search].present?
+      price_search = (index_params[:search].to_f * 100)
+      @orders = @orders
+        .joins(order_ingredients: :ingredient)
+        .where(
+          "orders.name ILIKE '%#{index_params[:search]}%' OR
+               ingredients.name ILIKE '%#{index_params[:search]}%' OR
+               orders.total_cents = #{price_search}"
+        ).distinct
+    end
   end
 
   def show
@@ -43,6 +54,10 @@ class OrdersController < ApplicationController
 
   def permitted_params
     params.permit(:name, :bread, :patty, :cheese, toppings: [], sauces: [])
+  end
+
+  def index_params
+    @index_params ||= params.permit(:search)
   end
 
   def burger_creator

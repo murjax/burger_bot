@@ -1,5 +1,10 @@
 <%= link_to "Add Burger", new_order_path, class: "text-blue-500" %>
 
+<%= form_tag root_path, method: 'get' do %>
+  <%= text_field_tag :search, params[:search] %>
+  <%= submit_tag('Search', name: nil) %>
+<% end %>
+
 <table class="min-w-full">
   <thead class="border-b">
     <tr>
