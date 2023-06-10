@@ -15,6 +15,7 @@ gem 'dotenv-rails'
 gem 'money-rails'
 gem 'tailwindcss-rails'
 gem 'devise'
+gem 'kaminari'
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem 'image_processing', '~> 1.2'

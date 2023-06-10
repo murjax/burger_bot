@@ -5,6 +5,8 @@
   <%= submit_tag('Search', name: nil) %>
 <% end %>
 
+<%= paginate @orders %>
+
 <table class="min-w-full">
   <thead class="border-b">
     <tr>
@@ -30,3 +32,5 @@
     <% end %>
   </tbody>
 </table>
+
+<%= paginate @orders %>
