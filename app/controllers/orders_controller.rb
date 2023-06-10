@@ -3,17 +3,12 @@ class OrdersController < ApplicationController
 
   def index
     if index_params[:search].present?
-      price_search = (index_params[:search].to_f * 100)
-      @orders = Order
-        .joins(order_ingredients: :ingredient)
+      search_response = Order
         .where(user: current_user)
-        .where(
-          "orders.name ILIKE '%#{index_params[:search]}%' OR
-               ingredients.name ILIKE '%#{index_params[:search]}%' OR
-               orders.total_cents = #{price_search}"
-        )
-        .distinct
-        .page(params[:page])
+        .search(search_object)
+
+      result_ids = search_response.results.map(&:_id)
+      @orders = Order.where(id: result_ids).page(params[:page])
     else
       @orders = Order.where(user: current_user).page(params[:page])
     end
@@ -65,5 +60,16 @@ class OrdersController < ApplicationController
 
   def burger_creator
     @burger_creator ||= BurgerCreator.new(permitted_params, current_user)
+  end
+
+  def search_object
+    {
+      query: {
+        query_string: {
+          query: index_params[:search]
+        }
+      },
+      min_score: 1
+    }
   end
 end
