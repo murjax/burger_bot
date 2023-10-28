@@ -310,4 +310,24 @@ Devise.setup do |config|
   # When set to false, does not sign a user in automatically after their password is
   # changed. Defaults to true, so a user is signed in automatically after changing a password.
   # config.sign_in_after_change_password = true
+
+  Devise.setup do |config|
+    config.saml_create_user = true
+    config.saml_update_user = true
+    config.saml_default_user_key = :email
+    config.saml_session_index_key = :session_index
+    config.saml_use_subject = true
+    config.idp_settings_adapter = nil
+    config.saml_configure do |settings|
+      settings.assertion_consumer_service_url = "#{ENV['SSO_CALLBACK']}/users/saml/auth"
+      settings.assertion_consumer_service_binding = "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST"
+      settings.name_identifier_format = "urn:oasis:names:tc:SAML:2.0:nameid-format:transient"
+      settings.issuer = "#{ENV['SSO_CALLBACK']}/users/saml/metadata"
+      settings.authn_context = ""
+      settings.idp_slo_target_url = ""
+      settings.idp_sso_target_url = ENV['IDP_SSO_TARGET_URL']
+      settings.idp_cert_fingerprint = ENV['IDP_CERT_FINGERPRINT']
+      settings.idp_cert_fingerprint_algorithm = 'http://www.w3.org/2000/09/xmldsig#sha256'
+    end
+  end
 end

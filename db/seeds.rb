@@ -5,10 +5,10 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
-puts 'Creating users...'
-User.create!(email: 'user1@example.com', password: 'Password123')
-User.create!(email: 'user2@example.com', password: 'Password123')
-User.create!(email: 'user3@example.com', password: 'Password123')
+# puts 'Creating users...'
+# User.create!(email: 'user1@example.com', password: 'Password123')
+# User.create!(email: 'user2@example.com', password: 'Password123')
+# User.create!(email: 'user3@example.com', password: 'Password123')
 
 User.all.each do |user|
   puts "Creating ingredients for #{user.email}..."

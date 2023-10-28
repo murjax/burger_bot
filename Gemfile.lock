@@ -91,6 +91,9 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    devise_saml_authenticatable (1.9.1)
+      devise (> 2.0.0)
+      ruby-saml (~> 1.7)
     dotenv (2.8.1)
     dotenv-rails (2.8.1)
       dotenv (= 2.8.1)
@@ -184,6 +187,9 @@ GEM
       actionpack (>= 5.2)
       railties (>= 5.2)
     rexml (3.2.5)
+    ruby-saml (1.16.0)
+      nokogiri (>= 1.13.10)
+      rexml
     rubyzip (2.3.2)
     selenium-webdriver (4.8.1)
       rexml (~> 3.2, >= 3.2.5)
@@ -229,6 +235,7 @@ DEPENDENCIES
   bootsnap
   capybara
   devise
+  devise_saml_authenticatable
   dotenv-rails
   importmap-rails
   money-rails
