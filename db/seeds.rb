@@ -43,4 +43,29 @@ User.all.each do |user|
   Ingredient.create!(user: user, ingredient_type: :sauce, name: 'Honey Mustard', price_cents: 0)
   Ingredient.create!(user: user, ingredient_type: :sauce, name: 'Ketchup', price_cents: 0)
   Ingredient.create!(user: user, ingredient_type: :sauce, name: 'Tabasco', price_cents: 0)
+
+  puts "Creating orders for #{user.email}..."
+
+  if user.id == 1
+    1000.times do |n|
+      puts "Creating orders ##{n}..."
+
+      bread = Ingredient.where(user: user, ingredient_type: :bread).all.sample
+      patty = Ingredient.where(user: user, ingredient_type: :patty).all.sample
+      cheese = Ingredient.where(user: user, ingredient_type: :cheese).all.sample
+      topping = Ingredient.where(user: user, ingredient_type: :topping).all.sample
+      sauce = Ingredient.where(user: user, ingredient_type: :sauce).all.sample
+
+      order = Order.create!(user: user, name: "Order #{n}")
+
+      OrderIngredient.create!(order: order, ingredient: bread, price_cents: rand(100..200))
+      OrderIngredient.create!(order: order, ingredient: patty, price_cents: rand(100..200))
+      OrderIngredient.create!(order: order, ingredient: cheese, price_cents: rand(100..200))
+      OrderIngredient.create!(order: order, ingredient: topping, price_cents: rand(100..200))
+      OrderIngredient.create!(order: order, ingredient: sauce, price_cents: rand(100..200))
+
+      total_cents = order.reload.order_ingredients.sum(:price_cents)
+      order.update!(total_cents: total_cents)
+    end
+  end
 end

@@ -2,7 +2,16 @@ class OrdersController < ApplicationController
   before_action :set_order, only: %i[show destroy]
 
   def index
-    @orders = Order.where(user: current_user)
+    if index_params[:search].present?
+      search_response = Order
+        .where(user: current_user)
+        .search(search_object)
+
+      result_ids = search_response.results.map(&:_id)
+      @orders = Order.where(id: result_ids).page(params[:page])
+    else
+      @orders = Order.where(user: current_user).page(params[:page])
+    end
   end
 
   def show
@@ -45,7 +54,22 @@ class OrdersController < ApplicationController
     params.permit(:name, :bread, :patty, :cheese, toppings: [], sauces: [])
   end
 
+  def index_params
+    @index_params ||= params.permit(:search)
+  end
+
   def burger_creator
     @burger_creator ||= BurgerCreator.new(permitted_params, current_user)
+  end
+
+  def search_object
+    {
+      query: {
+        query_string: {
+          query: index_params[:search]
+        }
+      },
+      min_score: 1
+    }
   end
 end
